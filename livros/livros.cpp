@@ -1,5 +1,6 @@
-#include <iostream>
 #include "livros.h"
+#include <iostream>
+
 
 
 //cadastrar livro que vai pro fim da lista
@@ -20,7 +21,7 @@ bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quanti
         return true;
     }
 
-    //chegar no ultimo
+    //etapas até chegar no ultimo
     Livro* atual = lista.primeiro;
     while (atual->proximo != nullptr){
         atual = atual->proximo;
@@ -29,10 +30,26 @@ bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quanti
     return true;
 }
 
+//mostra os livros cadastrados
+void listar(Lista & lista) {
+    if (lista.primeiro == nullptr) {
+        cout << "Nenhum livro cadastrado\n";
+        return;
+    }
+
+    Livro* atual = lista.primeiro;
+    while (atual != nullptr) {
+        cout << atual->codigo << " / " << atual->titulo << " / " << atual->autor
+            << " / disponiveis: " << atual->disponiveis << " / " << atual->quantidade << "\n";
+        atual = atual->proximo;
+    }
+}
 
 
 
-//livros cadastrados
+
+
+
 
 
 

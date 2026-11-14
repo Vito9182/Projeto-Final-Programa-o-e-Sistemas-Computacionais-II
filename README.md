@@ -19,5 +19,5 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `livros.cpp`: código das funções
 
 ### Funções
--| `cadastrar` | adiciona um livro (título, autor, código e quantidade) no fim da lista
--| `listar` | mostra todos os livros cadastrados
+- `cadastrar`: adiciona um livro (título, autor, código e quantidade) no fim da lista
+- `listar` : mostra todos os livros cadastrados
