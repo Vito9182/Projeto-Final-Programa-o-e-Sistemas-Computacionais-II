@@ -14,7 +14,7 @@ struct Livro {
 
 struct Lista {
     Livro* primeiro = nullptr;
-}
+};
 
 bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade);
 void listar(Lista& lista);

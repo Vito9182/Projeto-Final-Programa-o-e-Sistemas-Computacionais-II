@@ -3,10 +3,10 @@
 Sistema de biblioteca para cadastrar livros e usuários, controlar empréstimos e devoluções e guardar o histórico por usuário.
 
 ## Divisão de responsabilidades
-| Vitor    | Cadastro de livros | `livros/` |
-| Henrique | Cadastro de usuários | `--/` |
-| Arthur   | Empréstimos e devoluções | `--/` |
-| Elei     | Menu principal, integração e histórico | `--` |
+- **Vitor:** Cadastro de livros (`livros/`)
+- **Henrique:** Cadastro de usuários
+- **Arthur:** Empréstimos e devoluções
+- **Elei:** Menu principal, integração e histórico
 
 ---
 
@@ -19,5 +19,5 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `livros.cpp`: código das funções
 
 ### Funções
-| `cadastrar` | adiciona um livro (título, autor, código e quantidade) no fim da lista
-| `listar` | mostra todos os livros cadastrados
+-| `cadastrar` | adiciona um livro (título, autor, código e quantidade) no fim da lista
+-| `listar` | mostra todos os livros cadastrados
