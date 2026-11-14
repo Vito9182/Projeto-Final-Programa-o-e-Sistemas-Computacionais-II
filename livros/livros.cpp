@@ -6,7 +6,11 @@
 //cadastrar livro que vai pro fim da lista
 //lista por referencia, titulo e autor por valor
 bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade) {
-    //memoria
+    //
+    if (buscarCodigo(lista, codigo) != nullptr) {
+        return false;
+    }
+    //Alocação de memória
     Livro* novo = new Livro;
     novo->codigo = codigo;
     novo->titulo = titulo;

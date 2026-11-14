@@ -13,7 +13,7 @@ int main() {
         cout << "Achado por codigo: " << achado->titulo << "\n";
     }
 
-    achado = buscarTitulo(lista, "Blackout");
+    achado = buscarTitulo(lista, "Livro do vito");
     if (achado != nullptr) {
         cout << "Achado por titulo: " << achado->autor << "\n";
     }
@@ -21,6 +21,12 @@ int main() {
     if (buscarCodigo(lista, 99) == nullptr) {
         cout << "Codigo 99 nao existe\n";
     }
+
+    cout << "--- codigo repetido ---\n";
+    if (!cadastrar(lista, 1, "Repetido", "Ninguem", 1)) {
+        cout << "Codigo 1 ja existe, nao cadastrou\n";
+    }
+    listar(lista);
 
     return 0;
 }
