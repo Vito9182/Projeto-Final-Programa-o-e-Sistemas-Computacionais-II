@@ -25,3 +25,5 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `buscarCodigo`: procura um livro pelo código e devolve o ponteiro dele
 - `buscarTitulo`: procura um livro pelo título e devolve o ponteiro dele
 - `remover`: tira um livro da lista pelo código e libera a memória com `delete`
+- `contar`: conta quantos livros existem na lista (recursiva)
+- `limparLista`: libera da memória todos os livros da lista

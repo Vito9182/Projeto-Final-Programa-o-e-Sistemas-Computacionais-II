@@ -28,3 +28,7 @@ Livro* buscarTitulo(Lista& lista, string titulo);
 
 //remoção de livros
 bool remover(Lista& lista, int codigo);
+
+//contagem de livros(usando recursividade) e limpeza da lista
+int contar(Livro* livro);
+void limparLista(Lista& lista);

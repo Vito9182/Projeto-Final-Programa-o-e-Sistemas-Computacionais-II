@@ -6,7 +6,7 @@
 //cadastrar livro que vai pro fim da lista
 //lista por referencia, titulo e autor por valor
 bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade) {
-    //
+    //Recusa de codigo repetido
     if (buscarCodigo(lista, codigo) != nullptr) {
         return false;
     }
@@ -102,6 +102,24 @@ bool remover(Lista& lista, int codigo) {
     delete atual;
     atual = nullptr;
     return true;
+}
+
+//contagem de livros
+int contar(Livro* livro) {
+    if (livro == nullptr) {
+        return 0;
+    }
+    return 1 + contar(livro->proximo);
+}
+
+//apaga todos os livros da memoria
+void limparLista(Lista& lista) {
+    while (lista.primeiro != nullptr) {
+        Livro* apagar = lista.primeiro;
+        lista.primeiro = lista.primeiro->proximo;
+        delete apagar;
+        apagar = nullptr;
+    }
 }
 
 
