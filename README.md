@@ -24,3 +24,4 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `listar` : mostra todos os livros cadastrados
 - `buscarCodigo`: procura um livro pelo código e devolve o ponteiro dele
 - `buscarTitulo`: procura um livro pelo título e devolve o ponteiro dele
+- `remover`: tira um livro da lista pelo código e libera a memória com `delete`

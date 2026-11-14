@@ -3,29 +3,31 @@
 
 int main() {
     Lista lista;
-    cadastrar(lista, 1, "Livro do vito", "Vito", 3);
-    cadastrar(lista, 2, "Livro de historia", "Sr. Historia", 2);
+    cadastrar(lista, 1, "Livro1", "Autor1", 1);
+    cadastrar(lista, 2, "Livro2", "Autor2", 1);
+    cadastrar(lista, 3, "Livro3", "Autor3", 1);
+    cadastrar(lista, 4, "Livro4", "Autor4", 1);
+    cout << "--- lista inicial ---\n";
     listar(lista);
 
-    cout << "--- buscas ---\n";
-    Livro* achado = buscarCodigo(lista, 2);
-    if (achado != nullptr) {
-        cout << "Achado por codigo: " << achado->titulo << "\n";
+    remover(lista, 1);
+    cout << "--- removi o primeiro (codigo 1) ---\n";
+    listar(lista);
+
+    remover(lista, 3);
+    cout << "--- removi do meio (codigo 3) ---\n";
+    listar(lista);
+
+    remover(lista, 4);
+    cout << "--- removi do ultimo (codigo 4) ---\n";
+    listar(lista);
+
+    if (!remover(lista, 99)) {
+        cout << "Codigo 99 nao existe, nao removeu\n";
     }
 
-    achado = buscarTitulo(lista, "Livro do vito");
-    if (achado != nullptr) {
-        cout << "Achado por titulo: " << achado->autor << "\n";
-    }
-
-    if (buscarCodigo(lista, 99) == nullptr) {
-        cout << "Codigo 99 nao existe\n";
-    }
-
-    cout << "--- codigo repetido ---\n";
-    if (!cadastrar(lista, 1, "Repetido", "Ninguem", 1)) {
-        cout << "Codigo 1 ja existe, nao cadastrou\n";
-    }
+    remover(lista, 2);
+    cout << "--- remove o que restava (codigo 2) ---\n";
     listar(lista);
 
     return 0;

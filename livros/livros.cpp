@@ -74,6 +74,36 @@ Livro* atual = lista.primeiro;
     return nullptr;
 }
 
+//remove livro da lista pelo codigo
+bool remover(Lista& lista, int codigo) {
+    Livro* anterior = nullptr;
+    Livro* atual = lista.primeiro;
+    //movimento na lista
+    while (atual != nullptr && atual->codigo != codigo) {
+        anterior = atual;
+        atual = atual->proximo;
+    }
+
+    //nao encontrou
+    if (atual == nullptr) {
+        return false;
+    }
+    //se for o primeiro a lista começa no segundo
+    //se nao o livro de tras pula o que vai sair
+    if (anterior == nullptr) {
+        lista.primeiro = atual->proximo;
+    } 
+    
+    else {
+        anterior->proximo = atual->proximo;
+    }
+
+    //liberação da memoria
+    delete atual;
+    atual = nullptr;
+    return true;
+}
+
 
 
 

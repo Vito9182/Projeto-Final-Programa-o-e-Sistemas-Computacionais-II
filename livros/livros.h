@@ -25,3 +25,6 @@ void listar(Lista& lista);
 //Busca de livros
 Livro* buscarCodigo(Lista& lista, int codigo);
 Livro* buscarTitulo(Lista& lista, string titulo);
+
+//remoção de livros
+bool remover(Lista& lista, int codigo);
