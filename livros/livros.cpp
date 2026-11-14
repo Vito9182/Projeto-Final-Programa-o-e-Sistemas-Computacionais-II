@@ -45,6 +45,31 @@ void listar(Lista & lista) {
     }
 }
 
+//busca de livros por codigo
+//volta nullptr ou o ponteiro se nao encontrar
+Livro* buscarCodigo(Lista& lista, int codigo) {
+    Livro* atual = lista.primeiro;
+    while (atual != nullptr) {
+        if (atual->codigo == codigo) {
+            return atual;
+        }
+        atual = atual->proximo;
+    }
+    return nullptr;
+}
+
+//busca por titulo(nome precisa ser igual)
+Livro* buscarTitulo(Lista& lista, string titulo) {
+Livro* atual = lista.primeiro;
+    while (atual != nullptr) {
+        if (atual->titulo == titulo) {
+            return atual;
+        }
+        atual = atual->proximo;
+    }
+    return nullptr;
+}
+
 
 
 

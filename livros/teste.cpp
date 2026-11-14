@@ -3,18 +3,24 @@
 
 int main() {
     Lista lista;
-    cout << "--- vazio ---\n";
+    cadastrar(lista, 1, "Livro do vito", "Vito", 3);
+    cadastrar(lista, 2, "Livro de historia", "Sr. Historia", 2);
     listar(lista);
 
-    cout << "--- um livro ---\n";
-    cadastrar(lista, 1, "autor1", "autor2", 3);
-    listar(lista);
+    cout << "--- buscas ---\n";
+    Livro* achado = buscarCodigo(lista, 2);
+    if (achado != nullptr) {
+        cout << "Achado por codigo: " << achado->titulo << "\n";
+    }
 
-    cout << "--- varios livros ---\n";
-    cadastrar(lista, 2, "livro1", "livro2", 2);
-    cadastrar(lista, 3, "historinha", "gibizinho", 5);
-    cadastrar(lista, 4, "livrinho", "onepiece", 1);
-    listar(lista);
+    achado = buscarTitulo(lista, "Blackout");
+    if (achado != nullptr) {
+        cout << "Achado por titulo: " << achado->autor << "\n";
+    }
+
+    if (buscarCodigo(lista, 99) == nullptr) {
+        cout << "Codigo 99 nao existe\n";
+    }
 
     return 0;
 }
