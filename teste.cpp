@@ -1,13 +1,59 @@
 #include <iostream>
 #include <string>
+#include <vector>
 #include "livros/livros.h"
 #include "usuarios/usuarios.h"
 
 using namespace std;
 
+struct HistoricoEmprestimo {
+    int codigoUsuario;
+    int codigoLivro;
+    string tipo; // "emprestimo" ou "devolucao"
+};
+
+void registrarHistorico(vector<HistoricoEmprestimo>& historico, int codigoUsuario, int codigoLivro, const string& tipo) {
+    HistoricoEmprestimo item;
+    item.codigoUsuario = codigoUsuario;
+    item.codigoLivro = codigoLivro;
+    item.tipo = tipo;
+    historico.push_back(item);
+}
+
+void mostrarHistorico(vector<HistoricoEmprestimo>& historico) {
+    if (historico.empty()) {
+        cout << "Nenhum historico registrado.\n";
+        return;
+    }
+
+    for (size_t i = 0; i < historico.size(); i++) {
+        cout << "Usuario " << historico[i].codigoUsuario
+             << " | Livro " << historico[i].codigoLivro
+             << " | " << historico[i].tipo << "\n";
+    }
+}
+
+void mostrarHistoricoPorUsuario(vector<HistoricoEmprestimo>& historico, int codigoUsuario) {
+    bool encontrou = false;
+
+    for (size_t i = 0; i < historico.size(); i++) {
+        if (historico[i].codigoUsuario == codigoUsuario) {
+            cout << "Usuario " << historico[i].codigoUsuario
+                 << " | Livro " << historico[i].codigoLivro
+                 << " | " << historico[i].tipo << "\n";
+            encontrou = true;
+        }
+    }
+
+    if (!encontrou) {
+        cout << "Nenhum registro para esse usuario.\n";
+    }
+}
+
 int main() {
     ListaUsuarios lista;
     ListaLivros livros;
+    vector<HistoricoEmprestimo> historico;
 
     cadastrarUsuario(lista, 1, "Henrique", "henrique@email.com");
     cadastrarLivro(livros, 10, "C++ Basico", "Autor X", 2);
@@ -21,6 +67,10 @@ int main() {
         cout << "4 - Cadastrar livro\n";
         cout << "5 - Listar livros\n";
         cout << "6 - Buscar livro por codigo\n";
+        cout << "7 - Emprestimo de livro\n";
+        cout << "8 - Devolucao de livro\n";
+        cout << "9 - Historico por usuario\n";
+        cout << "10 - Historico geral\n";
         cout << "0 - Sair\n";
         cout << "Escolha: ";
         cin >> opcao;
@@ -100,6 +150,59 @@ int main() {
             } else {
                 cout << "Livro nao encontrado.\n";
             }
+        }
+        else if (opcao == 7) {
+            int codigoUsuario, codigoLivro;
+            cout << "Codigo do usuario: ";
+            cin >> codigoUsuario;
+            cout << "Codigo do livro: ";
+            cin >> codigoLivro;
+
+            Usuario* usuario = buscarUsuarioCodigo(lista, codigoUsuario);
+            Livro* livro = buscarLivroPorCodigo(livros, codigoLivro);
+
+            if (usuario == nullptr) {
+                cout << "Usuario nao encontrado.\n";
+            } else if (livro == nullptr) {
+                cout << "Livro nao encontrado.\n";
+            } else if (livro->disponiveis <= 0) {
+                cout << "Livro indisponivel para emprestimo.\n";
+            } else {
+                livro->disponiveis--;
+                registrarHistorico(historico, codigoUsuario, codigoLivro, "emprestimo");
+                cout << "Emprestimo realizado com sucesso!\n";
+            }
+        }
+        else if (opcao == 8) {
+            int codigoUsuario, codigoLivro;
+            cout << "Codigo do usuario: ";
+            cin >> codigoUsuario;
+            cout << "Codigo do livro: ";
+            cin >> codigoLivro;
+
+            Usuario* usuario = buscarUsuarioCodigo(lista, codigoUsuario);
+            Livro* livro = buscarLivroPorCodigo(livros, codigoLivro);
+
+            if (usuario == nullptr) {
+                cout << "Usuario nao encontrado.\n";
+            } else if (livro == nullptr) {
+                cout << "Livro nao encontrado.\n";
+            } else if (livro->disponiveis >= livro->quantidade) {
+                cout << "Esse livro ja esta disponivel.\n";
+            } else {
+                livro->disponiveis++;
+                registrarHistorico(historico, codigoUsuario, codigoLivro, "devolucao");
+                cout << "Devolucao registrada com sucesso!\n";
+            }
+        }
+        else if (opcao == 9) {
+            int codigoUsuario;
+            cout << "Codigo do usuario: ";
+            cin >> codigoUsuario;
+            mostrarHistoricoPorUsuario(historico, codigoUsuario);
+        }
+        else if (opcao == 10) {
+            mostrarHistorico(historico);
         }
         else if (opcao == 0) {
             cout << "Saindo...\n";
