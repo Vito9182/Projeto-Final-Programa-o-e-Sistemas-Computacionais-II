@@ -19,7 +19,7 @@ bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quanti
     novo->disponiveis = quantidade;
     novo->proximo = nullptr;
 
-    //se a lista estiver vazia, o novo livro vira o primeira
+    //se a lista estiver vazia, o novo livro vira o primeiro
     if (lista.primeiro == nullptr) {
         lista.primeiro = novo;
         return true;

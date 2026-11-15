@@ -50,4 +50,37 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `copiarParaVetor`: copia os ponteiros dos livros da lista para um vetor
 - `ordenarPorCodigo`: ordena o vetor pelo código com Insertion Sort (O(n²) no pior caso, O(n) no melhor)
 - `buscarCodigoContando`: busca sequencial que conta as comparações, O(n)
-- `buscaBinaria`: busca binária no vetor ordenado que conta as comparações, O(log n)
+- `buscarBinaria`: busca binária no vetor ordenado que conta as comparações, O(log n)
+
+### Estrutura de dados: lista encadeada
+Cada livro é um nó com um ponteiro `proximo` que aponta para o livro seguinte. A lista só guarda o `primeiro`, e o último aponta para `nullptr`.
+
+```
+primeiro -> [1 | Livro1] -> [2 | Livro2] -> [3 | Livro3] -> nullptr
+```
+
+### Ordenação e busca binária
+A lista encadeada fica na ordem de cadastro. Para ordenar, os ponteiros dos livros são copiados para um vetor, que é ordenado por código. Assim a lista original não muda e os livros não são duplicados. A busca binária só funciona nesse vetor ordenado, porque precisa acessar qualquer posição direto, o que a lista encadeada não permite.
+
+```
+vetor -> [ ptr | ptr | ptr | ptr ]
+            |     |     |     |
+            v     v     v     v
+         livros que continuam na lista
+```
+
+### Requisitos usados nesta parte
+- **Funções:** cada função faz uma coisa só; a lista é passada por referência (`&`) para alterar a original; o `cadastrar` tem parâmetro default (`quantidade = 1`)
+- **Ponteiros:** o campo `proximo`, os ponteiros `atual` e `anterior` que percorrem a lista, e o vetor de ponteiros `Livro**`
+- **Memória dinâmica:** `new` ao cadastrar e `delete` no `remover` e no `limparLista`; `new[]` no `copiarParaVetor` e `delete[]` por quem chama
+- **Lista encadeada:** inserção no fim, remoção (primeiro, meio e último) e travessia
+- **Recursividade:** a função `contar`
+- **Algoritmo de ordenação:** Insertion Sort em `ordenarPorCodigo`
+- **Algoritmos de busca:** busca sequencial e busca binária, com a comparação por contagem de operações
+
+### Como testar
+Na pasta do projeto:
+```
+g++ livros/teste.cpp livros/livros.cpp -o livros/teste.exe
+.\livros\teste.exe
+```
