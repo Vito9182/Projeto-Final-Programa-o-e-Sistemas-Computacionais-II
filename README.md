@@ -40,17 +40,17 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `teste.cpp`: programa para testes
 
 ### Funções
-- `cadastrar`: adiciona um livro (título, autor, código e quantidade) no fim da lista
-- `listar` : mostra todos os livros cadastrados
-- `buscarCodigo`: procura um livro pelo código e devolve o ponteiro dele
-- `buscarTitulo`: procura um livro pelo título e devolve o ponteiro dele
-- `remover`: tira um livro da lista pelo código e libera a memória com `delete`
-- `contar`: conta quantos livros existem na lista (recursiva)
-- `limparLista`: libera da memória todos os livros da lista
-- `copiarParaVetor`: copia os ponteiros dos livros da lista para um vetor
-- `ordenarPorCodigo`: ordena o vetor pelo código com Insertion Sort (O(n²) no pior caso, O(n) no melhor)
-- `buscarCodigoContando`: busca sequencial que conta as comparações, O(n)
-- `buscarBinaria`: busca binária no vetor ordenado que conta as comparações, O(log n)
+- `cadastrarLivro`: adiciona um livro (título, autor, código e quantidade) no fim da lista
+- `listarLivros` : mostra todos os livros cadastrados
+- `buscarLivroPorCodigo`: procura um livro pelo código e devolve o ponteiro dele
+- `buscarLivroPorTitulo`: procura um livro pelo título e devolve o ponteiro dele
+- `removerLivro`: tira um livro da lista pelo código e libera a memória com `delete`
+- `contarLivros`: conta quantos livros existem na lista (recursiva)
+- `limparListaLivros`: libera da memória todos os livros da lista
+- `copiarLivrosParaVetor`: copia os ponteiros dos livros da lista para um vetor
+- `ordenarLivrosPorCodigo`: ordena o vetor pelo código com Insertion Sort (O(n²) no pior caso, O(n) no melhor)
+- `buscarLivroPorCodigoContando`: busca sequencial que conta as comparações, O(n)
+- `buscarLivroBinaria`: busca binária no vetor ordenado que conta as comparações, O(log n)
 
 ### Estrutura de dados: lista encadeada
 Cada livro é um nó com um ponteiro `proximo` que aponta para o livro seguinte. A lista só guarda o `primeiro`, e o último aponta para `nullptr`.

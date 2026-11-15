@@ -2,44 +2,42 @@
 #include <string>
 using namespace std;
 
-//Cabeçalho
-//Uso de lista encadeada
+// Cadastro de livros da biblioteca, feito com lista encadeada.
+
+// Cada livro é um nó da lista.
 struct Livro {
     int codigo;
     string titulo;
     string autor;
-    int quantidade;
-    int disponiveis;
-    Livro* proximo;
+    int quantidade;     // total de exemplares.
+    int disponiveis;    // exemplares que não estão emprestados.
+    Livro* proximo;     // próximo livro da lista (nullptr no último).
 };
 
+// Guarda só o primeiro livro; os outros são alcançados pelo ponteiro proximo.
 struct ListaLivros {
-    Livro* primeiro = nullptr;
+    Livro* primeiro = nullptr;  // nullptr = lista vazia.
 };
 
-//Cadastrar livro
+// ---- cadastro e listagem ----
 bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor, int quantidade = 1);
-//Lista de livros cadastrados
 void listarLivros(ListaLivros& lista);
 
-//Busca de livros
+// ---- busca de livros ----
 Livro* buscarLivroPorCodigo(ListaLivros& lista, int codigo);
 Livro* buscarLivroPorTitulo(ListaLivros& lista, string titulo);
 
-//remoção de livros
+// ---- remoção, contagem e limpeza ----
 bool removerLivro(ListaLivros& lista, int codigo);
-
-//contagem de livros(usando recursividade) e limpeza da lista
 int contarLivros(Livro* livro);
 void limparListaLivros(ListaLivros& lista);
 
-//--------------------------------//
-//uso da ordenação e busca binária
+// ---- ordenação e busca binária ----
 
-//cópia dos livros para um vetor e ordenar por codigo
+// Cópia dos livros para um vetor e ordenar por codigo.
 Livro** copiarLivrosParaVetor(ListaLivros& lista, int& tamanho);
 void ordenarLivrosPorCodigo(Livro** vetor, int tamanho);
 
-//busca binaria
+// Busca binária.
 Livro* buscarLivroBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes);
 Livro* buscarLivroPorCodigoContando(ListaLivros& lista, int codigo, int& comparacoes);
