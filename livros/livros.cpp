@@ -154,6 +154,41 @@ void ordenarPorCodigo(Livro** vetor, int tamanho) {
     }
 }
 
+//Busca binaria no vetor
+Livro* buscaBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes) {
+    comparacoes = 0;
+    int inicio = 0;
+    int fim = tamanho - 1;
+
+    while (inicio <= fim) {
+        int meio = (inicio + fim) / 2;
+        comparacoes++;
+        if (vetor[meio]->codigo == codigo) {
+            return vetor[meio];
+        }
+        if (vetor[meio]->codigo < codigo) {
+            inicio = meio + 1;   //metade da direita
+        } else {
+            fim = meio - 1;      //metade da esquerda
+        }
+    }
+    return nullptr;
+}
+
+// busca sequencial igual o buscarCodigo, mas conta quantas comparaçoes fez
+Livro* buscarCodigoContando(Lista& lista, int codigo, int& comparacoes) {
+    comparacoes = 0;
+    Livro* atual = lista.primeiro;
+    while (atual != nullptr) {
+        comparacoes++;
+        if (atual->codigo == codigo) {
+            return atual;
+        }
+        atual = atual->proximo;
+    }
+    return nullptr;
+}
+
 
 
 

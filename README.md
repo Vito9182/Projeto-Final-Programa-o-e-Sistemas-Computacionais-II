@@ -3,10 +3,30 @@
 Sistema de biblioteca para cadastrar livros e usuários, controlar empréstimos e devoluções e guardar o histórico por usuário.
 
 ## Divisão de responsabilidades
-- **Vitor:** Cadastro de livros (`livros/`)
-- **Henrique:** Cadastro de usuários
-- **Arthur:** Empréstimos e devoluções
-- **Elei:** Menu principal, integração e histórico
+
+### Vitor: Cadastro de livros (`livros/`)
+- Criar o cadastro de livros
+- Registrar título, autor, código e quantidade
+- Listar os livros cadastrados
+- Implementar busca de livros
+
+### Henrique: Cadastro de usuários
+- Cadastrar os usuários da biblioteca
+- Registrar nome e código de identificação
+- Listar usuários cadastrados
+- Implementar busca por usuário
+
+### Arthur: Empréstimos e devoluções
+- Implementar empréstimo de livros
+- Verificar se existem exemplares disponíveis
+- Registrar devoluções
+- Atualizar a quantidade de livros disponíveis
+
+### Elei: Menu principal, integração e histórico
+- Desenvolver o menu principal do sistema
+- Integrar as funcionalidades dos outros integrantes
+- Criar histórico de empréstimos por usuário
+- Realizar testes e verificar possíveis erros
 
 ---
 
@@ -29,3 +49,5 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `limparLista`: libera da memória todos os livros da lista
 - `copiarParaVetor`: copia os ponteiros dos livros da lista para um vetor
 - `ordenarPorCodigo`: ordena o vetor pelo código com Insertion Sort (O(n²) no pior caso, O(n) no melhor)
+- `buscarCodigoContando`: busca sequencial que conta as comparações, O(n)
+- `buscaBinaria`: busca binária no vetor ordenado que conta as comparações, O(log n)

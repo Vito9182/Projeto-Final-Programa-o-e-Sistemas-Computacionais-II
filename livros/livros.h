@@ -39,3 +39,7 @@ void limparLista(Lista& lista);
 //cópia dos livros para um vetor e ordenar por codigo
 Livro** copiarParaVetor(Lista& lista, int& tamanho);
 void ordenarPorCodigo(Livro** vetor, int tamanho);
+
+//busca binaria
+Livro* buscaBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes);
+Livro* buscarCodigoContando(Lista& lista, int codigo, int& comparacoes);
