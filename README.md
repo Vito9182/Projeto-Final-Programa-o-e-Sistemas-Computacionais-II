@@ -27,3 +27,5 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 - `remover`: tira um livro da lista pelo código e libera a memória com `delete`
 - `contar`: conta quantos livros existem na lista (recursiva)
 - `limparLista`: libera da memória todos os livros da lista
+- `copiarParaVetor`: copia os ponteiros dos livros da lista para um vetor
+- `ordenarPorCodigo`: ordena o vetor pelo código com Insertion Sort (O(n²) no pior caso, O(n) no melhor)

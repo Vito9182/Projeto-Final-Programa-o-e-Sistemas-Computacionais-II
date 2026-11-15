@@ -122,6 +122,38 @@ void limparLista(Lista& lista) {
     }
 }
 
+//--------------------------------//
+//Ordenação e busca binária
+
+Livro** copiarParaVetor(Lista& lista, int& tamanho) {
+    tamanho = contar(lista.primeiro);
+    Livro** vetor = new Livro*[tamanho]; //alocação de vetor
+
+    Livro* atual = lista.primeiro;
+    for (int i = 0; i < tamanho; i++) {
+        vetor[i] = atual;
+        atual = atual->proximo;
+    }
+    return vetor;
+}
+
+//ordena o vetor pelo codigo usando Insertion Sort
+//O (n^2) no pior caso (vetor invertido) e O (n) no melhor (ja ordenado)
+void ordenarPorCodigo(Livro** vetor, int tamanho) {
+    for (int i = 1; i < tamanho; i++) {
+        Livro* chave = vetor[i];
+        int j = i - 1;
+
+        //empurra pra direita os livros com codigo maior que a chave
+        while (j >= 0 && vetor[j]->codigo > chave->codigo) {
+            vetor[j + 1] = vetor[j];
+            j--;
+        }
+        //coloca a chave no buraco que sobrou
+        vetor[j + 1] = chave;
+    }
+}
+
 
 
 

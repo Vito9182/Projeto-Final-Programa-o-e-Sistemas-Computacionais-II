@@ -3,19 +3,29 @@
 
 int main() {
     Lista lista;
-    cout << "total com a lista vazia: " << contar(lista.primeiro) << "\n";
+    cadastrar(lista, 30, "Livro30", "Autor30", 1);
+    cadastrar(lista, 10, "Livro10", "Autor10", 1);
+    cadastrar(lista, 20, "Livro20", "Autor20", 1);
+    cadastrar(lista, 5, "Livro5", "Autor5", 1);
 
-    cadastrar(lista, 1, "Livro1", "Autor1", 1);
-    cadastrar(lista, 2, "Livro2", "Autor2", 1);
-    cadastrar(lista, 3, "Livro3", "Autor3", 1);
-    cout << "total com tres livros: " << contar(lista.primeiro) << "\n";
-
-    remover(lista, 2);
-    cout << "total depois de remover um: " << contar(lista.primeiro) << "\n";
-
-    limparLista(lista);
-    cout << "total depois de limpar tudo: " << contar(lista.primeiro) << "\n";
+    cout << "--- lista na ordem de cadastro ---\n";
     listar(lista);
+
+    int tamanho = 0;
+    Livro** vetor = copiarParaVetor(lista, tamanho);
+    ordenarPorCodigo(vetor, tamanho);
+
+    cout << "--- vetor ordenado por codigo ---\n";
+    for (int i = 0; i < tamanho; i++) {
+        cout << vetor[i]->codigo << " / " << vetor[i]->titulo << "\n";
+    }
+
+    cout << "--- lista continua igual ---\n";
+    listar(lista);
+
+    delete[] vetor;
+    vetor = nullptr;
+    limparLista(lista);
 
     return 0;
 }

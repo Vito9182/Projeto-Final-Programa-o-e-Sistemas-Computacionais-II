@@ -32,3 +32,10 @@ bool remover(Lista& lista, int codigo);
 //contagem de livros(usando recursividade) e limpeza da lista
 int contar(Livro* livro);
 void limparLista(Lista& lista);
+
+//--------------------------------//
+//uso da ordenação e busca binária
+
+//cópia dos livros para um vetor e ordenar por codigo
+Livro** copiarParaVetor(Lista& lista, int& tamanho);
+void ordenarPorCodigo(Livro** vetor, int tamanho);
