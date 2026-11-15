@@ -37,7 +37,6 @@ Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e 
 ### Arquivos
 - `livros.h`: header com structs iniciais. struct Livro(nó) e struct Lista que guarda o primeiro livro.
 - `livros.cpp`: código das funções
-- `teste.cpp`: programa para testes
 
 ### Funções
 - `cadastrar`: adiciona um livro (título, autor, código e quantidade) no fim da lista
