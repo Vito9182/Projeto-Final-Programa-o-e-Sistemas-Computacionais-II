@@ -1,5 +1,5 @@
-#include <string>
 #pragma once
+#include <string>
 using namespace std;
 
 //Cabeçalho
@@ -13,33 +13,33 @@ struct Livro {
     Livro* proximo;
 };
 
-struct Lista {
+struct ListaLivros {
     Livro* primeiro = nullptr;
 };
 
 //Cadastrar livro
-bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade = 1);
+bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor, int quantidade = 1);
 //Lista de livros cadastrados
-void listar(Lista& lista);
+void listarLivros(ListaLivros& lista);
 
 //Busca de livros
-Livro* buscarCodigo(Lista& lista, int codigo);
-Livro* buscarTitulo(Lista& lista, string titulo);
+Livro* buscarLivroPorCodigo(ListaLivros& lista, int codigo);
+Livro* buscarLivroPorTitulo(ListaLivros& lista, string titulo);
 
 //remoção de livros
-bool remover(Lista& lista, int codigo);
+bool removerLivro(ListaLivros& lista, int codigo);
 
 //contagem de livros(usando recursividade) e limpeza da lista
-int contar(Livro* livro);
-void limparLista(Lista& lista);
+int contarLivros(Livro* livro);
+void limparListaLivros(ListaLivros& lista);
 
 //--------------------------------//
 //uso da ordenação e busca binária
 
 //cópia dos livros para um vetor e ordenar por codigo
-Livro** copiarParaVetor(Lista& lista, int& tamanho);
-void ordenarPorCodigo(Livro** vetor, int tamanho);
+Livro** copiarLivrosParaVetor(ListaLivros& lista, int& tamanho);
+void ordenarLivrosPorCodigo(Livro** vetor, int tamanho);
 
 //busca binaria
-Livro* buscaBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes);
-Livro* buscarCodigoContando(Lista& lista, int codigo, int& comparacoes);
+Livro* buscarLivroBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes);
+Livro* buscarLivroPorCodigoContando(ListaLivros& lista, int codigo, int& comparacoes);

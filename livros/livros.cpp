@@ -5,9 +5,9 @@
 
 //cadastrar livro que vai pro fim da lista
 //lista por referencia, titulo e autor por valor
-bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade) {
+bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor, int quantidade) {
     //Recusa de codigo repetido
-    if (buscarCodigo(lista, codigo) != nullptr) {
+    if (buscarLivroPorCodigo(lista, codigo) != nullptr) {
         return false;
     }
     //Alocação de memória
@@ -35,7 +35,7 @@ bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quanti
 }
 
 //mostra os livros cadastrados
-void listar(Lista & lista) {
+void listarLivros(ListaLivros & lista) {
     if (lista.primeiro == nullptr) {
         cout << "Nenhum livro cadastrado\n";
         return;
@@ -51,13 +51,13 @@ void listar(Lista & lista) {
 
 //busca de livros por codigo
 //volta nullptr ou o ponteiro se nao encontrar
-Livro* buscarCodigo(Lista& lista, int codigo) {
+Livro* buscarLivroPorCodigo(ListaLivros& lista, int codigo) {
     int comparacoes = 0;
-    return buscarCodigoContando(lista, codigo, comparacoes);
+    return buscarLivroPorCodigoContando(lista, codigo, comparacoes);
 }
 
 //busca por titulo(nome precisa ser igual)
-Livro* buscarTitulo(Lista& lista, string titulo) {
+Livro* buscarLivroPorTitulo(ListaLivros& lista, string titulo) {
 Livro* atual = lista.primeiro;
     while (atual != nullptr) {
         if (atual->titulo == titulo) {
@@ -69,7 +69,7 @@ Livro* atual = lista.primeiro;
 }
 
 //remove livro da lista pelo codigo
-bool remover(Lista& lista, int codigo) {
+bool removerLivro(ListaLivros& lista, int codigo) {
     Livro* anterior = nullptr;
     Livro* atual = lista.primeiro;
     //movimento na lista
@@ -99,15 +99,15 @@ bool remover(Lista& lista, int codigo) {
 }
 
 //contagem de livros
-int contar(Livro* livro) {
+int contarLivros(Livro* livro) {
     if (livro == nullptr) {
         return 0;
     }
-    return 1 + contar(livro->proximo);
+    return 1 + contarLivros(livro->proximo);
 }
 
 //apaga todos os livros da memoria
-void limparLista(Lista& lista) {
+void limparListaLivros(ListaLivros& lista) {
     while (lista.primeiro != nullptr) {
         Livro* apagar = lista.primeiro;
         lista.primeiro = lista.primeiro->proximo;
@@ -119,8 +119,8 @@ void limparLista(Lista& lista) {
 //--------------------------------//
 //Ordenação e busca binária
 
-Livro** copiarParaVetor(Lista& lista, int& tamanho) {
-    tamanho = contar(lista.primeiro);
+Livro** copiarLivrosParaVetor(ListaLivros& lista, int& tamanho) {
+    tamanho = contarLivros(lista.primeiro);
     Livro** vetor = new Livro*[tamanho]; //alocação de vetor
 
     Livro* atual = lista.primeiro;
@@ -133,7 +133,7 @@ Livro** copiarParaVetor(Lista& lista, int& tamanho) {
 
 //ordena o vetor pelo codigo usando Insertion Sort
 //O (n^2) no pior caso (vetor invertido) e O (n) no melhor (ja ordenado)
-void ordenarPorCodigo(Livro** vetor, int tamanho) {
+void ordenarLivrosPorCodigo(Livro** vetor, int tamanho) {
     for (int i = 1; i < tamanho; i++) {
         Livro* chave = vetor[i];
         int j = i - 1;
@@ -149,7 +149,7 @@ void ordenarPorCodigo(Livro** vetor, int tamanho) {
 }
 
 //Busca binaria no vetor
-Livro* buscaBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes) {
+Livro* buscarLivroBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes) {
     comparacoes = 0;
     int inicio = 0;
     int fim = tamanho - 1;
@@ -170,7 +170,7 @@ Livro* buscaBinaria(Livro** vetor, int tamanho, int codigo, int& comparacoes) {
 }
 
 // busca sequencial igual o buscarCodigo, mas conta quantas comparaçoes fez
-Livro* buscarCodigoContando(Lista& lista, int codigo, int& comparacoes) {
+Livro* buscarLivroPorCodigoContando(ListaLivros& lista, int codigo, int& comparacoes) {
     comparacoes = 0;
     Livro* atual = lista.primeiro;
     while (atual != nullptr) {
