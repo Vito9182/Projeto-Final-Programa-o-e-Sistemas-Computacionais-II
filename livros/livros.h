@@ -18,7 +18,7 @@ struct Lista {
 };
 
 //Cadastrar livro
-bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade);
+bool cadastrar(Lista& lista, int codigo, string titulo, string autor, int quantidade = 1);
 //Lista de livros cadastrados
 void listar(Lista& lista);
 

@@ -25,6 +25,11 @@ int main() {
         cout << "binaria " << compBinaria << " comparacoes\n";
     }
 
+    // cadastrar sem informar a quantidade, deve valer 1
+    cadastrar(lista, 2001, "Livro padrao", "Autor");
+    Livro* padrao = buscarCodigo(lista, 2001);
+    cout << "quantidade padrao: " << padrao->quantidade << "\n";
+
     delete[] vetor;
     vetor = nullptr;
     limparLista(lista);
