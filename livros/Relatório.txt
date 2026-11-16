@@ -1,34 +1,22 @@
 CADASTRO DE LIVROS (Vitor)
 
-1/ Lista encadeada de livros
-Os livros ficam numa lista encadeada: cada livro é um nó criado com new e
-guarda um ponteiro para o próximo. A lista guarda apenas o primeiro nó.
-Escolhi essa estrutura porque a quantidade de livros muda o tempo todo:
-cada nó é criado só quando precisa, e remover um livro não exige deslocar
-os outros, só religar dois ponteiros. A desvantagem é que não há acesso
-direto por posição, então buscar por código é O(n). Outra limitação: como
-a lista guarda só o primeiro nó, cadastrar no fim percorre a lista inteira
-(O(n)); guardar também um ponteiro para o último nó resolveria isso.
+O que foi feito
+Fiz o módulo de livros (pasta livros/): cadastro, listagem, busca por código e por título, remoção, contagem recursiva, ordenação por código e comparação entre busca sequencial e busca binária. O módulo tem um teste próprio (livros/teste.cpp) que confere cada função e imprime [ok] ou [ERRO].
 
-2/ Vetor de ponteiros e ordenação
-Para ordenar e para usar busca binária é preciso acessar posições
-diretamente, o que a lista não permite. Por isso os ponteiros dos livros
-são copiados para um vetor (Livro**, criado com new[]). O vetor guarda
-ponteiros, não cópias: a lista original continua na ordem de cadastro e
-os livros não são duplicados. O custo é O(n) para copiar e o vetor precisa
-ser refeito se a lista mudar.
+Estruturas escolhidas e por quê
 
-A ordenação é por código, com Insertion Sort implementado do zero.
-Complexidade: O(n²) no pior caso (vetor invertido), O(n) no melhor
-(já ordenado), O(1) de memória extra. Escolhi por ser simples de explicar
-e adequado para poucas centenas de livros. O Merge Sort seria O(n log n),
-mas com código bem mais longo, sem ganho relevante nesse tamanho.
+1. Lista encadeada para guardar os livros.
+Cada livro é um nó criado com new, com um ponteiro para o próximo; a lista guarda só o primeiro nó. Escolhi porque a quantidade de livros muda o tempo todo: o nó só existe quando é preciso, e remover um livro não desloca os outros, só religa dois ponteiros. Em compensação, não há acesso direto por posição, então buscar por código é O(n). Cadastrar no fim também é O(n), porque a lista só guarda o primeiro nó; guardar também o último resolveria isso.
 
-3/ Busca sequencial e busca binária
-A busca sequencial (na lista) é O(n). A busca binária (no vetor ordenado)
-é O(log n), pois descarta metade do vetor a cada comparação. Os dois
-algoritmos contam as comparações feitas. Resultado com 1000 livros
-cadastrados fora de ordem:
+2. Vetor de ponteiros (Livro**) para ordenar e usar busca binária.
+A lista não permite acessar a posição do meio, e a busca binária precisa disso. Por isso copio os ponteiros dos livros para um vetor criado com new[]. O vetor guarda ponteiros, não cópias: os livros não são duplicados e a lista continua na ordem de cadastro. O custo é O(n) para copiar, e o vetor precisa ser refeito se a lista mudar.
+
+Ordenação e busca
+
+Algoritmo de ordenação: Insertion Sort, implementado do zero, ordenando por código.
+Complexidade: O(n²) no pior caso (vetor invertido), O(n) no melhor caso (já ordenado) e O(1) de memória extra. Escolhi por ser simples e adequado para poucas centenas de livros; o Merge Sort seria O(n log n), mas com código bem mais longo e sem ganho relevante nesse tamanho.
+
+Busca sequencial (na lista): O(n). Busca binária (no vetor ordenado): O(log n), pois descarta metade do vetor a cada comparação. As duas contam as comparações feitas. Com 1000 livros cadastrados fora de ordem:
 
   Código procurado     Sequencial     Binária
   1                    1              9
@@ -36,34 +24,20 @@ cadastrados fora de ordem:
   1000                 858            10
   5000 (não existe)    1000           10
 
-A binária nunca passou de 10 comparações. A sequencial só vence quando o
-livro está no começo da lista. Como ordenar custa O(n²), a busca binária
-compensa quando se faz muitas buscas sobre o mesmo vetor ordenado.
+A binária nunca passou de 10 comparações. Como ordenar custa O(n²), ela compensa quando se faz muitas buscas sobre o mesmo vetor ordenado.
 
-4/ Recursividade
-A função contarLivros conta os nós recursivamente: o caso base é o ponteiro
-nulo (fim da lista), e cada chamada soma 1 e conta o resto. É O(n) em
-tempo e também em pilha de chamadas (uma chamada por livro), o que é
-adequado aqui, mas seria arriscado para listas muito grandes.
+Recursividade
+contarLivros conta os nós de forma recursiva: o caso base é o ponteiro nulo (fim da lista) e cada chamada soma 1 e conta o resto. É O(n) em tempo e em pilha de chamadas, adequado aqui, mas arriscado para listas muito grandes.
 
-5/ Gerenciamento de memória
-- new Livro em cadastrarLivro: o livro continua existindo após a função.
-- delete em removerLivro (que religa a lista antes de apagar o nó) e em
-  limparListaLivros (que apaga todos os nós).
-- new[] em copiarLivrosParaVetor; o delete[] é de quem chama a função.
+Gerenciamento de memória
+- new Livro em cadastrarLivro: o livro continua existindo depois que a função termina.
+- delete em removerLivro (religa a lista antes de apagar o nó) e em limparListaLivros (apaga todos os nós).
+- new[] em copiarLivrosParaVetor; quem chama a função faz o delete[].
 - Todo ponteiro liberado recebe nullptr.
-O módulo de livros é o dono dos nós: os outros módulos usam os livros mas
-não devem dar delete neles. O vetor não é dono dos livros, então liberar o
-vetor não apaga os livros. Por isso, quem guardar referência a um livro
-(histórico, empréstimos) deve guardar o código, e não o ponteiro, para
-evitar ponteiro inválido caso o livro seja removido.
+O módulo de livros é o dono dos nós: os outros módulos usam os livros, mas não dão delete neles. O vetor não é dono dos livros, então liberar o vetor não apaga os livros. Por isso, quem guardar referência a um livro (histórico, empréstimos) deve guardar o código, e não o ponteiro, para evitar ponteiro inválido caso o livro seja removido.
 
-6/ Outras decisões
-- Nomes das funções e da struct com sufixo do domínio (cadastrarLivro,
-  ListaLivros) para não colidir com os módulos dos colegas.
-- A lista é passada por referência (&) para ser alterada; título e autor
-  vão por valor.
+Outras decisões
+- Nomes com sufixo do domínio (cadastrarLivro, ListaLivros) para não colidir com os módulos dos colegas.
+- A lista é passada por referência (&) para ser alterada; título e autor vão por valor.
 - cadastrarLivro tem parâmetro default (quantidade = 1).
-- Código de livro é único: o cadastro recusa códigos repetidos.
-- O arquivo teste.cpp verifica cada função (cadastro, busca, remoção,
-  contagem, ordenação e busca binária) e imprime [ok] ou [ERRO].
+- O código do livro é único: o cadastro recusa códigos repetidos.

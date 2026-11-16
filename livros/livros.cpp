@@ -9,10 +9,6 @@
 // codigo, titulo, autor, quantidade: dados do livro (quantidade vale 1 se omitida)
 // Retorna true se cadastrou, false se o código já existe.
 bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor, int quantidade) {
-    if (quantidade <= 0) {
-        return false;
-    }
-
     // o código de cada livro é único
     if (buscarLivroPorCodigo(lista, codigo) != nullptr) {
         return false;
@@ -102,10 +98,6 @@ bool removerLivro(ListaLivros& lista, int codigo) {
 
     // não encontrou
     if (atual == nullptr) {
-        return false;
-    }
-
-    if (atual->disponiveis != atual->quantidade) {
         return false;
     }
 
@@ -228,6 +220,7 @@ Livro* buscarLivroPorCodigoContando(ListaLivros& lista, int codigo, int& compara
     }
     return nullptr;
 }
+
 
 
 
