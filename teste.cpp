@@ -68,10 +68,12 @@ int main() {
         cout << "4 - Cadastrar livro\n";
         cout << "5 - Listar livros\n";
         cout << "6 - Buscar livro por codigo\n";
-        cout << "7 - Emprestimo de livro\n";
-        cout << "8 - Devolucao de livro\n";
-        cout << "9 - Historico por usuario\n";
-        cout << "10 - Historico geral\n";
+        cout << "7 - Remover livro\n";
+        cout << "8 - Remover todos os livros\n";
+        cout << "9 - Emprestimo de livro\n";
+        cout << "10 - Devolucao de livro\n";
+        cout << "11 - Historico por usuario\n";
+        cout << "12 - Historico geral\n";
         cout << "0 - Sair\n";
         cout << "Escolha: ";
         cin >> opcao;
@@ -153,6 +155,29 @@ int main() {
             }
         }
         else if (opcao == 7) {
+            int codigo;
+            cout << "Codigo do livro: ";
+            cin >> codigo;
+
+            if (removerLivro(livros, codigo)) {
+                cout << "Livro removido com sucesso!\n";
+            } else {
+                cout << "Livro nao encontrado.\n";
+            }
+        }
+        else if (opcao == 8) {
+            char confirmacao;
+            cout << "Deseja remover todos os livros? (s/n): ";
+            cin >> confirmacao;
+
+            if (confirmacao == 's' || confirmacao == 'S') {
+                limparListaLivros(livros);
+                cout << "Todos os livros foram removidos.\n";
+            } else {
+                cout << "Operacao cancelada.\n";
+            }
+        }
+        else if (opcao == 9) {
             int codigoUsuario, codigoLivro;
             cout << "Codigo do usuario: ";
             cin >> codigoUsuario;
@@ -174,7 +199,7 @@ int main() {
                 cout << "Emprestimo realizado com sucesso!\n";
             }
         }
-        else if (opcao == 8) {
+        else if (opcao == 10) {
             int codigoUsuario, codigoLivro;
             cout << "Codigo do usuario: ";
             cin >> codigoUsuario;
@@ -196,13 +221,13 @@ int main() {
                 cout << "Devolucao registrada com sucesso!\n";
             }
         }
-        else if (opcao == 9) {
+        else if (opcao == 11) {
             int codigoUsuario;
             cout << "Codigo do usuario: ";
             cin >> codigoUsuario;
             mostrarHistoricoPorUsuario(historico, codigoUsuario);
         }
-        else if (opcao == 10) {
+        else if (opcao == 12) {
             mostrarHistorico(historico);
         }
         else if (opcao == 0) {
