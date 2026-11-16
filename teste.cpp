@@ -70,10 +70,12 @@ int main() {
         cout << "6 - Buscar livro por codigo\n";
         cout << "7 - Remover livro\n";
         cout << "8 - Remover todos os livros\n";
-        cout << "9 - Emprestimo de livro\n";
-        cout << "10 - Devolucao de livro\n";
-        cout << "11 - Historico por usuario\n";
-        cout << "12 - Historico geral\n";
+        cout << "9 - Ordenar livros por vetor\n";
+        cout << "10 - Buscar livro por codigo (binaria)\n";
+        cout << "11 - Emprestimo de livro\n";
+        cout << "12 - Devolucao de livro\n";
+        cout << "13 - Historico por usuario\n";
+        cout << "14 - Historico geral\n";
         cout << "0 - Sair\n";
         cout << "Escolha: ";
         cin >> opcao;
@@ -178,6 +180,49 @@ int main() {
             }
         }
         else if (opcao == 9) {
+            int tamanho = 0;
+            Livro** vetor = copiarLivrosParaVetor(livros, tamanho);
+            if (tamanho == 0) {
+                cout << "Nenhum livro cadastrado.\n";
+                delete[] vetor;
+            } else {
+                ordenarLivrosPorCodigo(vetor, tamanho);
+                cout << "Livros ordenados por codigo:\n";
+                for (int i = 0; i < tamanho; i++) {
+                    cout << vetor[i]->codigo << " - " << vetor[i]->titulo << "\n";
+                }
+                delete[] vetor;
+            }
+        }
+        else if (opcao == 10) {
+            int codigo;
+            cout << "Codigo do livro para busca binaria: ";
+            cin >> codigo;
+
+            int tamanho = 0;
+            Livro** vetor = copiarLivrosParaVetor(livros, tamanho);
+            if (tamanho == 0) {
+                cout << "Nenhum livro cadastrado.\n";
+                delete[] vetor;
+            } else {
+                ordenarLivrosPorCodigo(vetor, tamanho);
+                int comparacoes = 0;
+                Livro* encontrado = buscarLivroBinaria(vetor, tamanho, codigo, comparacoes);
+
+                if (encontrado != nullptr) {
+                    cout << "Livro encontrado por busca binaria:\n";
+                    cout << "Codigo: " << encontrado->codigo << "\n";
+                    cout << "Titulo: " << encontrado->titulo << "\n";
+                    cout << "Autor: " << encontrado->autor << "\n";
+                    cout << "Comparacoes: " << comparacoes << "\n";
+                } else {
+                    cout << "Livro nao encontrado.\n";
+                    cout << "Comparacoes: " << comparacoes << "\n";
+                }
+                delete[] vetor;
+            }
+        }
+        else if (opcao == 11) {
             int codigoUsuario, codigoLivro;
             cout << "Codigo do usuario: ";
             cin >> codigoUsuario;
@@ -199,7 +244,7 @@ int main() {
                 cout << "Emprestimo realizado com sucesso!\n";
             }
         }
-        else if (opcao == 10) {
+        else if (opcao == 12) {
             int codigoUsuario, codigoLivro;
             cout << "Codigo do usuario: ";
             cin >> codigoUsuario;
@@ -221,13 +266,13 @@ int main() {
                 cout << "Devolucao registrada com sucesso!\n";
             }
         }
-        else if (opcao == 11) {
+        else if (opcao == 13) {
             int codigoUsuario;
             cout << "Codigo do usuario: ";
             cin >> codigoUsuario;
             mostrarHistoricoPorUsuario(historico, codigoUsuario);
         }
-        else if (opcao == 12) {
+        else if (opcao == 14) {
             mostrarHistorico(historico);
         }
         else if (opcao == 0) {
