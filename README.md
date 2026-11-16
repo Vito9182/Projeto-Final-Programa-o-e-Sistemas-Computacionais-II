@@ -162,3 +162,9 @@ Projeto desenvolvido por estudantes do curso de Engenharia de Software do Centro
 ---
 
 Desenvolvido como projeto acadêmico para aplicação prática dos conceitos de programação e estruturas de dados.
+
+# Código de execução 
+
+g++ main.cpp emprestimos/emprestimos.cpp livros/livros.cpp usuarios/usuarios.cpp -o biblioteca.exe
+
+.\biblioteca.exe

@@ -67,7 +67,7 @@ bool removerEmprestimo(Emprestimo*& raiz, int codigo) {
     return true;
 }
 
-void registrarEvento(PilhaHistoricoEmprestimos& historico, const std::string& descricao) {
+void registrarEvento(PilhaHistoricoEmprestimos& historico, const string& descricao) {
     EventoEmprestimo* evento = new EventoEmprestimo{descricao, historico.topo};
     historico.topo = evento;
     ++historico.tamanho;
@@ -115,11 +115,11 @@ int criarEmprestimo(
 
     --livro.disponiveis;
     controle.proximoCodigoEmprestimo =
-        codigo == std::numeric_limits<int>::max() ? 0 : codigo + 1;
+        codigo == numeric_limits<int>::max() ? 0 : codigo + 1;
     registrarEvento(
         controle.historico,
-        "Emprestimo " + std::to_string(codigo) + ": usuario " +
-            std::to_string(codigoUsuario) + ", livro " + std::to_string(livro.codigo)
+        "Emprestimo " + to_string(codigo) + ": usuario " +
+            to_string(codigoUsuario) + ", livro " + to_string(livro.codigo)
     );
     return codigo;
 }
@@ -135,8 +135,8 @@ void processarFilaParaLivro(
         return;
     }
 
-    const std::size_t solicitacoesNaFila = controle.filaEspera.tamanho;
-    for (std::size_t i = 0; i < solicitacoesNaFila; ++i) {
+    const size_t solicitacoesNaFila = controle.filaEspera.tamanho;
+    for (size_t i = 0; i < solicitacoesNaFila; ++i) {
         SolicitacaoPendente* solicitacao = desenfileirar(controle.filaEspera);
         if (solicitacao->codigoLivro != codigoLivro) {
             enfileirar(
@@ -152,7 +152,7 @@ void processarFilaParaLivro(
             registrarEvento(
                 controle.historico,
                 "Solicitacao descartada: usuario " +
-                    std::to_string(solicitacao->codigoUsuario) + " nao existe mais"
+                    to_string(solicitacao->codigoUsuario) + " nao existe mais"
             );
             delete solicitacao;
             continue;
@@ -178,7 +178,7 @@ void listarEmprestimosEmOrdem(const Emprestimo* atual) {
         return;
     }
     listarEmprestimosEmOrdem(atual->esquerda);
-    std::cout << "Emprestimo " << atual->codigo << " / usuario " << atual->codigoUsuario
+    cout << "Emprestimo " << atual->codigo << " / usuario " << atual->codigoUsuario
               << " / livro " << atual->codigoLivro << "\n";
     listarEmprestimosEmOrdem(atual->direita);
 }
@@ -227,8 +227,8 @@ SolicitacaoEmprestimo solicitarEmprestimo(
         enfileirar(controle.filaEspera, codigoUsuario, codigoLivro);
         registrarEvento(
             controle.historico,
-            "Usuario " + std::to_string(codigoUsuario) + " entrou na fila do livro " +
-                std::to_string(codigoLivro)
+            "Usuario " + to_string(codigoUsuario) + " entrou na fila do livro " +
+                to_string(codigoLivro)
         );
         return {ResultadoEmprestimo::EmFilaDeEspera, 0};
     }
@@ -238,8 +238,8 @@ SolicitacaoEmprestimo solicitarEmprestimo(
         enfileirar(controle.filaEspera, codigoUsuario, codigoLivro);
         registrarEvento(
             controle.historico,
-            "Usuario " + std::to_string(codigoUsuario) + " entrou na fila do livro " +
-                std::to_string(codigoLivro)
+            "Usuario " + to_string(codigoUsuario) + " entrou na fila do livro " +
+                to_string(codigoLivro)
         );
         return {ResultadoEmprestimo::EmFilaDeEspera, 0};
     }
@@ -271,8 +271,8 @@ bool registrarDevolucao(
     ++livro->disponiveis;
     registrarEvento(
         controle.historico,
-        "Devolucao do emprestimo " + std::to_string(codigoEmprestimo) + ": usuario " +
-            std::to_string(codigoUsuario) + ", livro " + std::to_string(codigoLivro)
+        "Devolucao do emprestimo " + to_string(codigoEmprestimo) + ": usuario " +
+            to_string(codigoUsuario) + ", livro " + to_string(codigoLivro)
     );
     processarFilaParaLivro(controle, livros, usuarios, codigoLivro);
     return true;
@@ -280,7 +280,7 @@ bool registrarDevolucao(
 
 void listarEmprestimosAtivos(const ControleEmprestimos& controle) {
     if (controle.ativos.raiz == nullptr) {
-        std::cout << "Nenhum emprestimo ativo.\n";
+        cout << "Nenhum emprestimo ativo.\n";
         return;
     }
     listarEmprestimosEmOrdem(controle.ativos.raiz);
@@ -288,12 +288,12 @@ void listarEmprestimosAtivos(const ControleEmprestimos& controle) {
 
 void listarFilaEspera(const ControleEmprestimos& controle) {
     if (controle.filaEspera.inicio == nullptr) {
-        std::cout << "Fila de espera vazia.\n";
+        cout << "Fila de espera vazia.\n";
         return;
     }
     const SolicitacaoPendente* atual = controle.filaEspera.inicio;
     while (atual != nullptr) {
-        std::cout << "Usuario " << atual->codigoUsuario << " / livro " << atual->codigoLivro
+        cout << "Usuario " << atual->codigoUsuario << " / livro " << atual->codigoLivro
                   << "\n";
         atual = atual->proxima;
     }
@@ -301,12 +301,12 @@ void listarFilaEspera(const ControleEmprestimos& controle) {
 
 void listarHistoricoEmprestimos(const ControleEmprestimos& controle) {
     if (controle.historico.topo == nullptr) {
-        std::cout << "Historico vazio.\n";
+        cout << "Historico vazio.\n";
         return;
     }
     const EventoEmprestimo* atual = controle.historico.topo;
     while (atual != nullptr) {
-        std::cout << atual->descricao << "\n";
+        cout << atual->descricao << "\n";
         atual = atual->proximo;
     }
 }
