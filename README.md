@@ -84,3 +84,19 @@ Na pasta do projeto:
 g++ livros/teste.cpp livros/livros.cpp -o livros/teste.exe
 .\livros\teste.exe
 ```
+
+## Empréstimos e devoluções (`emprestimos/`)
+
+O módulo de empréstimos integra a lista encadeada de livros e a lista de usuários:
+
+- `solicitarEmprestimo` valida livro e usuário; se houver exemplar, cria um empréstimo ativo e decrementa `disponiveis`.
+- Se não houver exemplar, a solicitação entra no fim da fila de espera. Ao devolver um exemplar, a fila é percorrida e a primeira solicitação válida para aquele livro recebe o exemplar.
+- `registrarDevolucao` recebe o código do empréstimo ativo, remove-o da árvore binária e atualiza o estoque. O livro não pode ser removido enquanto houver exemplares emprestados.
+- As operações são guardadas numa pilha de histórico, exibidas da mais recente para a mais antiga.
+- `listarEmprestimosAtivos`, `listarFilaEspera` e `listarHistoricoEmprestimos` exibem o estado dessas estruturas. `limparControleEmprestimos(controle, livros)` libera a memória e devolve ao estoque os exemplares de empréstimos ainda ativos.
+
+Exemplo de compilação dos testes:
+```
+g++ -std=c++11 emprestimos/teste.cpp emprestimos/emprestimos.cpp livros/livros.cpp usuarios/usuarios.cpp -o /tmp/teste-emprestimos
+/tmp/teste-emprestimos
+```

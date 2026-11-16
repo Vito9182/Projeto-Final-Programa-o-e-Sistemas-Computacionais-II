@@ -3,6 +3,7 @@
 #include <vector>
 #include "livros/livros.h"
 #include "usuarios/usuarios.h"
+using namespace std;
 
 using namespace std;
 
