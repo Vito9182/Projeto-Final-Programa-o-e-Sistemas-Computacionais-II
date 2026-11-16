@@ -1,102 +1,164 @@
-# Projeto-Final-Programa-o-e-Sistemas-Computacionais-II
+# 📚 Sistema de Gerenciamento de Biblioteca
 
-Sistema de biblioteca para cadastrar livros e usuários, controlar empréstimos e devoluções e guardar o histórico por usuário.
+## 1. Sobre o projeto
 
-## Divisão de responsabilidades
+Este projeto consiste no desenvolvimento de um sistema de gerenciamento de biblioteca utilizando a linguagem C++. Foi desenvolvido como trabalho final da disciplina **Programação e Sistemas Computacionais II**, do curso de Engenharia de Software do Centro Universitário Campo Real.
 
-### Vitor: Cadastro de livros (`livros/`)
-- Criar o cadastro de livros
-- Registrar título, autor, código e quantidade
-- Listar os livros cadastrados
-- Implementar busca de livros
+O sistema tem como objetivo realizar o gerenciamento de livros, usuários, empréstimos e devoluções, aplicando estruturas de dados e conceitos fundamentais de programação estudados durante a disciplina.
 
-### Henrique: Cadastro de usuários
-- Cadastrar os usuários da biblioteca
-- Registrar nome e código de identificação
-- Listar usuários cadastrados
-- Implementar busca por usuário
+## 2. Funcionalidades
 
-### Arthur: Empréstimos e devoluções
-- Implementar empréstimo de livros
-- Verificar se existem exemplares disponíveis
-- Registrar devoluções
-- Atualizar a quantidade de livros disponíveis
+### 📖 Gerenciamento de livros
+- Cadastro de livros.
+- Listagem dos livros cadastrados.
+- Busca de livros por código e título.
+- Remoção de livros.
+- Controle de quantidade disponível.
+- Contagem recursiva de livros.
+- Ordenação dos livros utilizando Insertion Sort.
+- Busca sequencial e busca binária.
 
-### Elei: Menu principal, integração e histórico
-- Desenvolver o menu principal do sistema
-- Integrar as funcionalidades dos outros integrantes
-- Criar histórico de empréstimos por usuário
-- Realizar testes e verificar possíveis erros
+### 👤 Gerenciamento de usuários
+- Cadastro de usuários.
+- Consulta de usuários cadastrados.
+- Gerenciamento dos dados dos usuários.
+- Verificação de usuários durante as operações de empréstimo.
+
+### 🔄 Gerenciamento de empréstimos
+- Realização de empréstimos.
+- Registro de devoluções.
+- Controle de disponibilidade dos livros.
+- Fila de espera para livros indisponíveis.
+- Histórico de empréstimos e devoluções.
+- Consulta de empréstimos ativos.
+
+## 3. Estruturas de dados utilizadas
+
+O projeto utiliza diferentes estruturas de dados para organizar e gerenciar as informações.
+
+### Lista encadeada
+Utilizada no gerenciamento dos livros, permitindo inserção, remoção, busca e percorrimento dos registros.
+
+Representação:
+
+```text
+[Livro 1] -> [Livro 2] -> [Livro 3] -> nullptr
+```
+
+### Fila (FIFO)
+Utilizada para organizar a lista de espera de empréstimos. O primeiro usuário que entra na fila é o primeiro a ser atendido.
+
+Representação:
+
+```text
+INÍCIO -> [Usuário 1] -> [Usuário 2] -> [Usuário 3] -> FIM
+```
+
+### Pilha (LIFO)
+Utilizada para armazenar o histórico de operações de empréstimos e devoluções, permitindo consultar os registros na ordem inversa de inserção.
+
+Representação:
+
+```text
+TOPO
+ |
+[Registro 3]
+ |
+[Registro 2]
+ |
+[Registro 1]
+```
+
+### Árvore Binária de Busca (BST)
+Utilizada para organizar os empréstimos ativos, permitindo inserção, busca e consulta dos registros por meio da estrutura hierárquica.
+
+Representação ilustrativa:
+
+```text
+        [Registro 2]
+        /          \
+ [Registro 1]   [Registro 3]
+```
+
+## 4. Algoritmos de ordenação e busca
+
+O sistema aplica algoritmos desenvolvidos durante a disciplina:
+
+- **Insertion Sort:** utilizado para ordenar os livros.
+- **Busca sequencial:** percorre os elementos até encontrar o registro desejado.
+- **Busca binária:** realiza a busca em uma sequência ordenada, reduzindo o espaço de pesquisa a cada etapa.
+
+Também são realizadas comparações da quantidade de operações das buscas para observar as diferenças de desempenho.
+
+## 5. Gerenciamento de memória
+
+O projeto utiliza alocação dinâmica de memória por meio de `new` e liberação por meio de `delete`, permitindo a criação e remoção de elementos das estruturas de dados.
+
+Os ponteiros são utilizados para manipular os elementos das estruturas, com atenção à liberação da memória para evitar vazamentos.
+
+## 6. Organização do projeto
+
+```text
+Projeto-Final-Programa-o-e-Sistemas-Computacionais-II/
+│
+├── emprestimos/
+│   ├── emprestimos.cpp
+│   └── teste.cpp
+│
+├── livros/
+│   ├── livros.cpp
+│   └── teste.cpp
+│
+├── usuarios/
+│   └── usuarios.cpp
+│
+├── README.md
+└── teste.cpp
+```
+
+## 7. Divisão de responsabilidades
+
+O desenvolvimento foi dividido entre os integrantes da equipe, com cada participante responsável por um módulo do sistema.
+
+| Integrante | Responsabilidade |
+|---|---|
+| Vitor | Gerenciamento de livros |
+| Henrique | Cadastro e gerenciamento de usuários |
+| Arthur | Empréstimos e devoluções |
+| Elei | Menu principal, integração dos módulos, histórico e testes |
+
+## 8. Testes
+
+Foram desenvolvidos testes para verificar o funcionamento das operações dos módulos de livros e empréstimos.
+
+Os testes verificam situações como:
+
+- Cadastro e remoção de livros.
+- Cadastro de usuários.
+- Busca e ordenação.
+- Controle de quantidade disponível.
+- Realização de empréstimos.
+- Devolução de livros.
+- Funcionamento da fila de espera.
+- Controle de empréstimos ativos.
+
+## 9. Tecnologias utilizadas
+
+- Linguagem C++.
+- Git.
+- GitHub.
+- Visual Studio Code.
+- Compilador G++.
+
+## 10. Integrantes
+
+Projeto desenvolvido por estudantes do curso de Engenharia de Software do Centro Universitário Campo Real.
+
+**Disciplina:** Programação e Sistemas Computacionais II  
+**Professor:** Giovane Galvão  
+**Instituição:** Centro Universitário Campo Real  
+**Ano:** 2026
 
 ---
 
-## Cadastro de livros (`livros/`)
-
-Esta parte guarda os livros da biblioteca e permite cadastrar, listar, buscar e remover.
-
-### Arquivos
-- `livros.h`: header com structs iniciais. struct Livro(nó) e struct Lista que guarda o primeiro livro.
-- `livros.cpp`: código das funções
-- `teste.cpp`: programa para testes
-
-### Funções
-- `cadastrarLivro`: adiciona um livro (título, autor, código e quantidade) no fim da lista
-- `listarLivros` : mostra todos os livros cadastrados
-- `buscarLivroPorCodigo`: procura um livro pelo código e devolve o ponteiro dele
-- `buscarLivroPorTitulo`: procura um livro pelo título e devolve o ponteiro dele
-- `removerLivro`: tira um livro da lista pelo código e libera a memória com `delete`
-- `contarLivros`: conta quantos livros existem na lista (recursiva)
-- `limparListaLivros`: libera da memória todos os livros da lista
-- `copiarLivrosParaVetor`: copia os ponteiros dos livros da lista para um vetor
-- `ordenarLivrosPorCodigo`: ordena o vetor pelo código com Insertion Sort (O(n²) no pior caso, O(n) no melhor)
-- `buscarLivroPorCodigoContando`: busca sequencial que conta as comparações, O(n)
-- `buscarLivroBinaria`: busca binária no vetor ordenado que conta as comparações, O(log n)
-
-### Estrutura de dados: lista encadeada
-Cada livro é um nó com um ponteiro `proximo` que aponta para o livro seguinte. A lista só guarda o `primeiro`, e o último aponta para `nullptr`.
-
-```
-primeiro -> [1 | Livro1] -> [2 | Livro2] -> [3 | Livro3] -> nullptr
-```
-
-### Ordenação e busca binária
-A lista encadeada fica na ordem de cadastro. Para ordenar, os ponteiros dos livros são copiados para um vetor, que é ordenado por código. Assim a lista original não muda e os livros não são duplicados. A busca binária só funciona nesse vetor ordenado, porque precisa acessar qualquer posição direto, o que a lista encadeada não permite.
-
-```
-vetor -> [ ptr | ptr | ptr | ptr ]
-            |     |     |     |
-            v     v     v     v
-         livros que continuam na lista
-```
-
-### Requisitos usados nesta parte
-- **Funções:** cada função faz uma coisa só; a lista é passada por referência (`&`) para alterar a original; o `cadastrar` tem parâmetro default (`quantidade = 1`)
-- **Ponteiros:** o campo `proximo`, os ponteiros `atual` e `anterior` que percorrem a lista, e o vetor de ponteiros `Livro**`
-- **Memória dinâmica:** `new` ao cadastrar e `delete` no `remover` e no `limparLista`; `new[]` no `copiarParaVetor` e `delete[]` por quem chama
-- **Lista encadeada:** inserção no fim, remoção (primeiro, meio e último) e travessia
-- **Recursividade:** a função `contar`
-- **Algoritmo de ordenação:** Insertion Sort em `ordenarPorCodigo`
-- **Algoritmos de busca:** busca sequencial e busca binária, com a comparação por contagem de operações
-
-### Como testar
-Na pasta do projeto:
-```
-g++ livros/teste.cpp livros/livros.cpp -o livros/teste.exe
-.\livros\teste.exe
-```
-
-## Empréstimos e devoluções (`emprestimos/`)
-
-O módulo de empréstimos integra a lista encadeada de livros e a lista de usuários:
-
-- `solicitarEmprestimo` valida livro e usuário; se houver exemplar, cria um empréstimo ativo e decrementa `disponiveis`.
-- Se não houver exemplar, a solicitação entra no fim da fila de espera. Ao devolver um exemplar, a fila é percorrida e a primeira solicitação válida para aquele livro recebe o exemplar.
-- `registrarDevolucao` recebe o código do empréstimo ativo, remove-o da árvore binária e atualiza o estoque. O livro não pode ser removido enquanto houver exemplares emprestados.
-- As operações são guardadas numa pilha de histórico, exibidas da mais recente para a mais antiga.
-- `listarEmprestimosAtivos`, `listarFilaEspera` e `listarHistoricoEmprestimos` exibem o estado dessas estruturas. `limparControleEmprestimos(controle, livros)` libera a memória e devolve ao estoque os exemplares de empréstimos ainda ativos.
-
-Exemplo de compilação dos testes:
-```
-g++ -std=c++11 emprestimos/teste.cpp emprestimos/emprestimos.cpp livros/livros.cpp usuarios/usuarios.cpp -o /tmp/teste-emprestimos
-/tmp/teste-emprestimos
-```
+Desenvolvido como projeto acadêmico para aplicação prática dos conceitos de programação e estruturas de dados.
