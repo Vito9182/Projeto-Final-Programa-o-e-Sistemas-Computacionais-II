@@ -7,8 +7,12 @@
 // Cadastra um livro no fim da lista.
 // lista: lista de livros (por referência, pois é alterada)
 // codigo, titulo, autor, quantidade: dados do livro (quantidade vale 1 se omitida)
-// Retorna true se cadastrou, false se o código já existe.
+// Retorna true se cadastrou, false se o código já existe ou a quantidade é inválida.
 bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor, int quantidade) {
+    // o default (= 1) só vale quando a quantidade é omitida; 0 ou negativo é recusado
+        if (quantidade <= 0) {
+        return false;
+    }
     // o código de cada livro é único
     if (buscarLivroPorCodigo(lista, codigo) != nullptr) {
         return false;
@@ -30,7 +34,7 @@ bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor,
 
     // anda até o último livro da lista
     Livro* atual = lista.primeiro;
-    while (atual->proximo != nullptr){
+    while (atual->proximo != nullptr) {
         atual = atual->proximo;
     }
     atual->proximo = novo;
@@ -40,7 +44,7 @@ bool cadastrarLivro(ListaLivros& lista, int codigo, string titulo, string autor,
 // Mostra todos os livros cadastrados.
 // lista: lista de livros a mostrar
 // Não retorna nada, só imprime na tela.
-void listarLivros(ListaLivros & lista) {
+void listarLivros(ListaLivros& lista) {
     if (lista.primeiro == nullptr) {
         cout << "Nenhum livro cadastrado\n";
         return;
@@ -85,7 +89,7 @@ Livro* atual = lista.primeiro;
 // Remove da lista o livro com o código informado e libera a memória dele.
 // lista: lista de livros (por referência, pois é alterada)
 // codigo: código do livro que vai sair
-// Retorna true se removeu, false se não existe livro com esse código.
+// Retorna true se removeu, false se não existe livro com esse código ou se ele tem exemplar emprestado.
 bool removerLivro(ListaLivros& lista, int codigo) {
     Livro* anterior = nullptr;
     Livro* atual = lista.primeiro;
@@ -98,6 +102,11 @@ bool removerLivro(ListaLivros& lista, int codigo) {
 
     // não encontrou
     if (atual == nullptr) {
+        return false;
+    }
+
+    // se tem exemplar emprestado, não pode remover
+    if (atual->disponiveis != atual->quantidade) {
         return false;
     }
 
