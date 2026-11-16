@@ -1,0 +1,57 @@
+# RELATÓRIO TÉCNICO
+## Sistema de Gerenciamento de Biblioteca
+
+**Disciplina:** Programação e Sistemas Computacionais II  
+**Curso:** Engenharia de Software  
+**Instituição:** Centro Universitário Campo Real  
+**Professor:** Giovane Galvão  
+**Ano:** 2026
+
+### 1. Organização e estruturas de dados
+
+O projeto foi desenvolvido em C++ e dividido em módulos responsáveis pelo gerenciamento de livros, usuários e empréstimos. A divisão facilita a organização do código e permite que cada parte tenha funções específicas.
+
+Para armazenar livros e usuários, foram utilizadas listas encadeadas. Cada elemento possui seus dados e um ponteiro para o próximo elemento. Essa estrutura permite inserir e remover registros dinamicamente, sem precisar deslocar os demais elementos. A busca nesses módulos é feita por percurso sequencial, com complexidade O(n).
+
+No módulo de empréstimos, foi implementada uma fila de espera (FIFO), na qual a primeira solicitação registrada é a primeira a ser processada. Essa estrutura é adequada para respeitar a ordem de chegada dos usuários que aguardam um livro.
+
+Também foi implementada uma pilha (LIFO) para armazenar o histórico de eventos. Dessa forma, os registros mais recentes ficam no topo e podem ser consultados primeiro.
+
+Para controlar os empréstimos ativos, foi utilizada uma Árvore Binária de Busca (BST), organizada pelo código do empréstimo. Essa estrutura permite inserir, buscar e remover registros, além de listar os empréstimos em ordem crescente por meio do percurso em ordem. A busca possui complexidade O(log n) em árvores equilibradas, podendo chegar a O(n) no pior caso.
+
+### 2. Algoritmo de ordenação
+
+Para ordenar os livros pelo código, foi implementado o algoritmo Insertion Sort, sem utilização de funções prontas de ordenação.
+
+Como a lista encadeada não permite acesso direto às posições, os ponteiros dos livros são copiados para um vetor. Assim, a ordenação é realizada no vetor sem alterar a ordem original da lista.
+
+A complexidade do Insertion Sort é O(n²) no pior caso e O(n) no melhor caso, quando os elementos já estão ordenados. Sua memória extra é O(1), desconsiderando o vetor utilizado para armazenar os ponteiros.
+
+### 3. Algoritmos de busca
+
+O projeto implementa dois métodos de busca por código de livro:
+
+- **Busca sequencial:** percorre a lista encadeada até encontrar o livro desejado. Sua complexidade é O(n).
+- **Busca binária:** utiliza o vetor previamente ordenado para reduzir o espaço de pesquisa pela metade a cada comparação. Sua complexidade é O(log n).
+
+Os dois métodos contabilizam as comparações realizadas, permitindo observar a diferença de desempenho. Nos testes com 1.000 livros, a busca binária realizou no máximo 10 comparações nos casos testados, enquanto a busca sequencial chegou a 1.000 comparações quando o código procurado não existia.
+
+### 4. Recursividade
+
+A recursividade foi aplicada na função `contarLivros`, que percorre os nós da lista de livros e soma um elemento a cada chamada. O caso base ocorre quando o ponteiro recebido é `nullptr`, indicando o final da lista.
+
+Também existem funções recursivas no módulo de empréstimos, utilizadas para percorrer a árvore e liberar seus nós.
+
+### 5. Gerenciamento de memória dinâmica
+
+O projeto utiliza ponteiros e alocação dinâmica por meio de `new` e `new[]`. Essa abordagem permite criar os nós das listas, da fila, da pilha e da árvore conforme a necessidade.
+
+A liberação é realizada com `delete` para os nós individuais e `delete[]` para o vetor de ponteiros dos livros. Também foram implementadas funções de limpeza das estruturas, responsáveis por liberar a memória alocada.
+
+Os ponteiros são utilizados para conectar os elementos e permitir a manipulação das estruturas. Após a liberação, as estruturas são atualizadas para evitar referências a elementos removidos.
+
+### 6. Considerações finais
+
+O desenvolvimento do sistema permitiu aplicar conceitos de modularização, funções, ponteiros, recursividade, alocação dinâmica e estruturas de dados. A implementação dos algoritmos de ordenação e busca também possibilitou comparar diferentes estratégias de organização e consulta de informações.
+
+Os testes desenvolvidos nos módulos de livros e empréstimos verificam operações como cadastro, remoção, busca, ordenação, empréstimos, devoluções e fila de espera.
